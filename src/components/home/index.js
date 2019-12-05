@@ -7,25 +7,46 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      forFilter: []
     };
+  }
+
+  navigateToMain = () => {
+    if (localStorage.getItem("token")) {
+      this.props.history.push("/customer");
+    }
   }
 
   fetchData = async () => {
     const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/phone/getAll");
     const  { body } = await responseFromServer.json();
     const data = body;
-    this.setState({ data });
+    this.setState({ data, forFilter: data });
+  }
+
+  searchHandler = (event) => {
+    const filtered = event.target.value.trim().length > 0 ?
+    this.state.forFilter.filter((value) => {
+      return value.model.toLowerCase().startsWith(event.target.value.toLowerCase());
+    })
+    :
+    this.state.forFilter;
+
+    this.setState({
+      data: filtered
+    });
   }
 
   async componentDidMount() {
+    this.navigateToMain();
     await this.fetchData();
   }
 
   render() {
     return (
       <div>
-        <Search />
+        <Search handler={this.searchHandler} />
         <Paper style={{ width: '100%', overflowX: 'auto', marginTop: 30 }}>
           <List data={this.state.data} editable={false} />
         </Paper>
