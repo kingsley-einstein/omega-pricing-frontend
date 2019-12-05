@@ -31,7 +31,7 @@ export default class Home extends Component {
   searchHandler = (event) => {
     const filtered = event.target.value.trim().length > 0 ?
     this.state.forFilter.filter((value) => {
-      return value.model.toLowerCase().startsWith(event.target.value.toLowerCase());
+      return value.model.toLowerCase().includes(event.target.value.toLowerCase());
     })
     :
     this.state.forFilter;

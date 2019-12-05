@@ -12,7 +12,7 @@ import { Menu } from '@material-ui/icons';
 
 // Header component
 export default ({ handler }) => (
-  <AppBar position="static">
+  <AppBar position="static" color="secondary">
     <Toolbar>
       <IconButton edge="start" onClick={handler}>
         <Menu />
