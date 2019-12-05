@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableRow, TableCell, withStyles, IconButton } from '@material-ui/core';
-import { Edit, Delete } from '@material-ui/icons';
+import { Edit, Delete, Euro } from '@material-ui/icons';
 
 const StyledTableRow = withStyles(theme => {
   return {
@@ -30,28 +30,28 @@ const ListItem = ({ item, editable, handleEdit, handleDelete }) => (
       {item.model}
     </StyledTableCell>
     <StyledTableCell>
-      {item.afficheur}
+      {item.afficheur} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.batterie}
+      {item.batterie} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.connecteur}
+      {item.connecteur} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.micro}
+      {item.micro} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.hautParleur}
+      {item.hautParleur} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.bouttonOnOff}
+      {item.bouttonOnOff} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.desoxydation}
+      {item.desoxydation} <Euro />
     </StyledTableCell>
     <StyledTableCell>
-      {item.restoration}
+      {item.restoration} <Euro />
     </StyledTableCell>
     {
       editable &&
