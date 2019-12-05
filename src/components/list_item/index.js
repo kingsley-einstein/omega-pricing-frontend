@@ -15,7 +15,8 @@ const StyledTableRow = withStyles(theme => {
 const StyledTableCell = withStyles(theme => {
   return {
     body: {
-      fontSize: 14
+      fontSize: 14,
+      textAlign: "center"
     }
   }
 })(TableCell);
@@ -58,7 +59,7 @@ const ListItem = ({ item, editable, handleEdit, handleDelete }) => (
         <IconButton onClick={() => handleEdit(item)}>
           <Edit />
         </IconButton>
-        <IconButton onClick={() => handleDelete(item.id)}>
+        <IconButton onClick={() => handleDelete(item)}>
           <Delete />
         </IconButton>
       </StyledTableCell>

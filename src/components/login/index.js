@@ -17,6 +17,13 @@ const styles = {
   field: {
     width: "100%",
     marginBottom: 30
+  },
+  progress: {
+    marginTop: 10,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   }
 };
 
@@ -72,6 +79,7 @@ export default class Login extends Component {
           password: ""
         }
       });
+      localStorage.setItem("token", body.token);
       this.props.history.push("/customer");
     }
   }
@@ -120,7 +128,12 @@ export default class Login extends Component {
             <Button variant="contained" color="primary" disabled={!this.isValid()} onClick={this.submit}>
               Submit
             </Button>
-            {this.state.showProgress && <CircularProgress />}
+            {
+              this.state.showProgress && 
+              <div style={styles.progress}>
+                <CircularProgress size={32} />
+              </div>
+            }
           </CardContent>
         </Card>
         <Snackbar 

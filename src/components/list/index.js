@@ -41,7 +41,7 @@ const List = ({ data, editable, handleEdit, handleDelete }) => {
       <TableBody>
         {data.length === 0 && <ListNoData />}
         {data.length > 0 && data.map((value) => (
-          <ListItem key={value.id.toString()} item={value} editable={editable} handleEdit={handleEdit} handleDelete={handleDelete} />
+          <ListItem key={value.id.toString()} item={value} editable={editable} handleEdit={handleEdit ? handleEdit : null} handleDelete={handleDelete ? handleDelete : null} />
         ))}
       </TableBody>
     </Table>
