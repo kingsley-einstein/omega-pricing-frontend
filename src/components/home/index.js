@@ -8,7 +8,8 @@ export default class Home extends Component {
     super(props);
     this.state = {
       data: [],
-      forFilter: []
+      forFilter: [],
+      isListVisible: false
     };
   }
 
@@ -37,7 +38,8 @@ export default class Home extends Component {
     this.state.forFilter;
 
     this.setState({
-      data: filtered
+      data: filtered,
+      isListVisible: event.target.value.trim().length > 0
     });
   }
 
@@ -51,7 +53,10 @@ export default class Home extends Component {
       <div>
         <Search handler={this.searchHandler} />
         <Paper style={{ width: '100%', overflowX: 'auto', marginTop: 30 }}>
-          <List data={this.state.data} editable={false} />
+          {
+            this.state.isListVisible &&
+            <List data={this.state.data} editable={false} />
+          }
         </Paper>
       </div>
     );
