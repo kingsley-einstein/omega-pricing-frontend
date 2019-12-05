@@ -2,6 +2,7 @@ import React from 'react';
 import { TableRow, TableCell, withStyles, IconButton } from '@material-ui/core';
 import { Edit, Delete, Euro } from '@material-ui/icons';
 
+// Material table row
 const StyledTableRow = withStyles(theme => {
   return {
     root: {
@@ -21,6 +22,7 @@ const StyledTableCell = withStyles(theme => {
   }
 })(TableCell);
 
+// Single model component in list
 const ListItem = ({ item, editable, handleEdit, handleDelete }) => (
   <StyledTableRow>
     <StyledTableCell component="th" scope="row">

@@ -11,6 +11,7 @@ const styles = makeStyles({
   }
 });
 
+// Material table cell
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -18,6 +19,7 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
+// Model list component
 const List = ({ data, editable, handleEdit, handleDelete }) => {
   // Set classes
   const style = styles();

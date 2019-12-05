@@ -12,12 +12,14 @@ export default class Home extends Component {
     };
   }
 
+  // If session is valid, navigate to main page
   navigateToMain = () => {
     if (localStorage.getItem("token")) {
       this.props.history.push("/customer");
     }
   }
 
+  // Fetch model list
   fetchData = async () => {
     const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/phone/getAll");
     const  { body } = await responseFromServer.json();
@@ -25,6 +27,7 @@ export default class Home extends Component {
     this.setState({ data, forFilter: data });
   }
 
+  // Search filter
   searchHandler = (event) => {
     const filtered = event.target.value.trim().length > 0 ?
     this.state.forFilter.filter((value) => {

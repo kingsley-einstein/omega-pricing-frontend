@@ -21,12 +21,14 @@ const styles = {
   }
 };
 
+// Customer component
+
 export default class Customer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      forFilter: [],
+      forFilter: [], // For filtering
       submittable: {
         model: "",
         afficheur: null,
@@ -54,6 +56,7 @@ export default class Customer extends Component {
     await this.fetchData();
   }
 
+  // Show toast with customised message
   showSnackbar = (message) => {
     this.setState({
       showSnackbar: true,
@@ -61,6 +64,7 @@ export default class Customer extends Component {
     });
   }
 
+  // Hide toast
   hideSnackbar = () => {
     this.setState({
       showSnackbar: false,
@@ -68,6 +72,7 @@ export default class Customer extends Component {
     });
   }
 
+  // Get authenticated user from the server
   getLoggedUser = async () => {
     const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/admin", {
       headers: {
@@ -80,12 +85,14 @@ export default class Customer extends Component {
     this.setState({ verifiedUser: body });
   }
 
+  // Fetch models from the server and update state
   fetchData = async () => {
     const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/phone/getAll");
     const  { body } = await responseFromServer.json();
     this.setState({ data: body, forFilter: body });
   }
 
+  // Reset form
   resetSubmittable = () => {
     const newSubmittable = this.state.submittable;
     Object.keys(newSubmittable).forEach((key) => {
@@ -94,22 +101,26 @@ export default class Customer extends Component {
     this.setState({ submittable: newSubmittable });
   }
 
+  // Switch mode from edit to create
   switchModes = () => {
     this.setState({
       editMode: false
     });
   }
   
+  // Pre-fill form for update
   preFillForEdit = (obj) => {
     const item = this.state.data.find((v) => {
       return obj.id === v.id
     });
+    // Pre-fill form and change mode o update
     this.setState({
       submittable: item,
       editMode: true
     });
   }
 
+  // Delete a model and refresh list
   handleDelete = async (obj) => {
     const responseFromServer = await fetch(`https://omega-pricing.herokuapp.com/api/v1/phone/delete/${obj.id}`, {
       method: "DELETE",
@@ -122,15 +133,19 @@ export default class Customer extends Component {
     await this.fetchData();
   }
 
+  // Handle input change
   handleChange = (event) => {
     const newSubmittable = this.state.submittable;
     newSubmittable[event.target.name] = event.target.value;
     this.setState({ submittable: newSubmittable });
   }
 
+  // Edit a model
   handleEdit = async () => {
     this.setState({ showProgress: true })
+    // Destructure id of item to update
     const { id } = this.state.submittable;
+    // Create new model from form. Do not send ids as they have to be unique
     const editBody = {
       model: this.state.submittable.model,
       afficheur: this.state.submittable.afficheur,
@@ -160,9 +175,12 @@ export default class Customer extends Component {
     await this.fetchData();
   }
 
+  // Create new model
   handleSubmit = async () => {
     this.setState({ showProgress: true });
+    // New model
     let requestBody;
+    // Create model from new object. This only runs if the id key is present in object from an edit mode 
     if (this.state.submittable.id) {
       requestBody = {
         model: this.state.submittable.model,
@@ -176,6 +194,7 @@ export default class Customer extends Component {
         restoration: this.state.submittable.restoration
       };
     } else {
+      // Use form object if no id key is present
       requestBody = this.state.submittable
     }
     const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/phone/add", {
@@ -201,6 +220,7 @@ export default class Customer extends Component {
     await this.fetchData();
   }
 
+  // Handle search and filter list
   searchHandler = (event) => {
     const filtered = event.target.value.trim().length > 0 ? 
       this.state.forFilter.filter((value) => {

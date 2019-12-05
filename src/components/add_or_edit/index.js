@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 
+// Styling
 const styles = {
   flexDiv: {
     display: "flex",
@@ -21,6 +22,7 @@ const styles = {
   }
 };
 
+// Form to add or edit a model
 export default ({ handleChange, editEnabled, handleSubmit, handleEdit, preEdit }) => (
   <div>
     <div style={styles.flexDiv}>

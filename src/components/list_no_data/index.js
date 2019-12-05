@@ -19,6 +19,7 @@ const StyledTableCell = withStyles(theme => {
   }
 })(TableCell);
 
+// Placeholder for empty list
 export default () => (
   <StyledTableRow>
     <StyledTableCell>No Data</StyledTableCell>

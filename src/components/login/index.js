@@ -41,16 +41,19 @@ export default class Login extends Component {
     };
   }
 
+  // Listen for input and update state
   change = (event) => {
     const newData = this.state.data;
     newData[event.target.name] = event.target.value;
     this.setState({ data: newData });
   }
 
+  // Hide taste
   hideSnackbar = () => {
     this.setState({ showSnackbar: false });
   }
 
+  // Submit to server
   submit = async (event) => {
     this.setState({ showProgress: true });
     const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/admin/login", {
@@ -84,6 +87,7 @@ export default class Login extends Component {
     }
   }
 
+  // Check if form is valid
   isValid = () => {
     return emailRegex().test(this.state.data.email) && this.state.data.email.trim().length > 0 && this.state.data.password.trim().length > 0
   }

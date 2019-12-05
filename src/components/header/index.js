@@ -1,15 +1,16 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, makeStyles } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 
-const styles = makeStyles(theme => ({
-  iconBtn: {
-    marginRight: theme.spacing(2)
-  }
-}));
+// const styles = makeStyles(theme => ({
+//   iconBtn: {
+//     marginRight: theme.spacing(2)
+//   }
+// }));
 
 // const style = styles();
 
+// Header component
 export default ({ handler }) => (
   <AppBar position="static">
     <Toolbar>
