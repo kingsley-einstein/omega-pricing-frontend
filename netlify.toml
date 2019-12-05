@@ -1,4 +1,4 @@
 [build]
 base = "omega-pricing-frontend/"
-publish = "omega-pricing-frontend/build"
+publish = "build/"
 command = "npm run build"
