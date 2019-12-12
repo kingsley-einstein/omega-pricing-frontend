@@ -23,7 +23,7 @@ const styles = {
 
 // Customer component
 
-export default class Customer extends Component {
+export default class Store extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,8 +54,9 @@ export default class Customer extends Component {
   }
 
   async componentDidMount() {
+    this.setStore();
     await this.getLoggedUser();
-    await this.fetchStores();
+    await this.fetchStore();
     await this.fetchData();
   }
 
@@ -88,22 +89,34 @@ export default class Customer extends Component {
     this.setState({ verifiedUser: body });
   }
 
+  setStore = () => {
+    this.setState({ store: parseInt(this.props.match.params.id) });
+  }
+
   // Fetch models from the server and update state
   fetchData = async () => {
-    const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/phone/getAll");
+    const { id } = this.props.match.params;
+    const responseFromServer = await fetch(`https://omega-pricing.herokuapp.com/api/v1/phones/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
     const  { body } = await responseFromServer.json();
     this.setState({ data: body, forFilter: body });
   }
 
-  fetchStores = async () => {
-    const responseFromServer = await fetch("https://omega-pricing.herokuapp.com/api/v1/stores", {
+  fetchStore = async () => {
+    const { id } = this.props.match.params;
+    const responseFromServer = await fetch(`https://omega-pricing.herokuapp.com/api/v1/store/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
     const { body } = await responseFromServer.json();
-    this.setState({ stores: body });
+    console.log(body);
+    this.setState({ stores: [body] });
   }
 
   // Reset form
@@ -289,3 +302,4 @@ export default class Customer extends Component {
     );
   }
 }
+

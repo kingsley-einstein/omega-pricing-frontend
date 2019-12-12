@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, InputLabel, Select, FormControl } from '@material-ui/core';
 
 // Styling
 const styles = {
@@ -23,7 +23,7 @@ const styles = {
 };
 
 // Form to add or edit a model
-export default ({ handleChange, editEnabled, handleSubmit, handleEdit, preEdit }) => (
+export default ({ handleChange, editEnabled, handleSubmit, handleEdit, preEdit, stores }) => (
   <div>
     <div style={styles.flexDiv}>
       <div style={styles.div}>
@@ -52,6 +52,30 @@ export default ({ handleChange, editEnabled, handleSubmit, handleEdit, preEdit }
       </div>
       <div style={styles.div}>
         <TextField style={styles.field} label="Restoration" variant="outlined" name="restoration" type="number" onChange={handleChange} value={preEdit.restoration} />
+      </div>
+      <div style={styles.div}>
+        <FormControl variant="outlined" style={styles.field}>
+          <InputLabel htmlFor="store">
+            Store
+          </InputLabel>
+          <Select
+            native
+            value={preEdit.store}
+            name="store"
+            onChange={handleChange}
+            inputProps={{
+              name: "store",
+              id: "store"
+            }}
+          >
+            {
+              stores.length > 0 &&
+              stores.map((store) => (
+                <option key={store.id.toString()} value={store.id}>{store.name}</option>
+              ))
+            }
+          </Select>
+        </FormControl>
       </div>
     </div>
     <Button style={styles.btn} variant="contained" disabled={editEnabled} color="primary" onClick={handleSubmit}>

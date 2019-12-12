@@ -5,7 +5,9 @@ import Home from './components/home';
 import Sidebar from './components/sidebar';
 import Login from './components/login';
 import Customer from './components/customer';
-import Register from './components/register'
+import Register from './components/register';
+import StoresHome from './components/stores_home';
+import Store from './components/store';
 // import './App.css';
 
 class App extends Component {
@@ -31,7 +33,10 @@ class App extends Component {
   }
 
   isLoggedIn = () => {
-    return window.location.href.endsWith("/customer") || window.location.href.endsWith("/register");
+    return window.location.href.endsWith("/customer") || 
+    window.location.href.endsWith("/register") ||
+    window.location.href.endsWith("/stores") ||
+    window.location.href.includes("/store")
   } 
   render() {
     return (
@@ -43,6 +48,8 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/customer" component={Customer} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/stores" component={StoresHome} />
+          <Route exact path="/store/:id" component={Store} />
         </Router>
       </div>
     );

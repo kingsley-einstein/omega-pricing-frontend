@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItemIcon, ListItem, ListItemText, Divider } from '@material-ui/core';
-import { Forward, Home, User, Add, ExitToApp } from '@material-ui/icons';
+import { Forward, Home, Storage, Add, ExitToApp } from '@material-ui/icons';
 
 const Sidebar = ({ open, closeHandler, isLoggedIn, logoutHandler }) => (
   <Drawer open={open} anchor="left" onClose={closeHandler}>
@@ -37,6 +37,12 @@ const Sidebar = ({ open, closeHandler, isLoggedIn, logoutHandler }) => (
               <Add />
             </ListItemIcon>
             <ListItemText primary="Enregister" />
+          </ListItem>
+          <ListItem onClick={closeHandler} button component={props => <Link to="/stores" {...props} />}>
+            <ListItemIcon>
+              <Storage />
+            </ListItemIcon>
+            <ListItemText primary="Stores" />
           </ListItem>
           <Divider />
           <ListItem onClick={logoutHandler} button>
